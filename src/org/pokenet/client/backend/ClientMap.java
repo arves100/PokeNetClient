@@ -652,7 +652,9 @@ public class ClientMap extends TiledMap {
 						}
 					}
 					if (m_curMap.wasOnGrass(p) && m_curMap.isOnGrass(p)) {
-						switch (p.getDirection()) {
+						switch (p.getDirection()) { //TODO: Mancanza del case Down, default break per il momento
+						default:
+							break;
 						case Up:
 							m_grassOverlay.draw(m_xOffset + p.getServerX(),
 									m_yOffset + p.getServerY() + 32 + 8);

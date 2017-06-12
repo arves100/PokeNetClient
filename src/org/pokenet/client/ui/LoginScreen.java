@@ -151,8 +151,8 @@ public class LoginScreen extends Window {
 			m_serverRev.setFont(GameClient.getFontSmall());
 			m_serverRev.setForeground(new Color(255, 255, 255));
 			m_serverRev.pack();
-			m_serverRev.setLocation(m_clientRev.getX() + m_clientRev.getWidth() + 16, 
-					m_clientRev.getY());
+			m_serverRev.setLocation(m_clientRev.getX(), 
+					m_clientRev.getY() - 16);
 			m_serverRev.setVisible(true);
 			this.add(m_serverRev);
 
@@ -171,8 +171,8 @@ public class LoginScreen extends Window {
 	public void setServerRevision(String rev) {
 		m_serverRev.setText("Server Version: r" + rev);
 		m_serverRev.pack();
-		m_serverRev.setLocation(m_clientRev.getX() + m_clientRev.getWidth() + 16, 
-				m_clientRev.getY());
+		m_serverRev.setLocation(m_clientRev.getX() + m_clientRev.getWidth(), 
+				m_clientRev.getY() - 16);
 	}
 	
 	/**
@@ -192,19 +192,27 @@ public class LoginScreen extends Window {
 				s.nextLine();
 				s.nextLine();
 				s.nextLine();
-
+				s.close();
 				m_clientRev = new Label("Client Version: svn:" + s.nextLine());
 				f = new File(path + "rev.txt");
 				s = new Scanner(f);
 				m_clientRev.setText(m_clientRev.getText() + " // rev:" + s.nextLine());
-				
+				s.close();
 			} else {
+				f = new File(path + "/.git/refs/heads/master");
+				Scanner s = new Scanner(f);
+				
+				m_clientRev = new Label("Client Version: git: " + s.nextLine());
+				s.close();
+			}
+/*			} else {
 				f = new File(path + "rev.txt");
 				Scanner s;
 				s = new Scanner(f);
 
 				m_clientRev = new Label("Client Version: r" + s.nextLine());
-			}
+				s.close();
+			}*/
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			m_clientRev = new Label("Client Version: ?");

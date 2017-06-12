@@ -8,7 +8,6 @@ import java.util.HashMap;
 
 import mdes.slick.sui.Container;
 import mdes.slick.sui.Display;
-import mdes.slick.sui.Label;
 import mdes.slick.sui.event.ActionEvent;
 import mdes.slick.sui.event.ActionListener;
 
@@ -23,7 +22,6 @@ import org.apache.mina.transport.socket.nio.NioSocketConnector;
 import org.newdawn.slick.AngelCodeFont;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
-import org.newdawn.slick.BigImage;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Font;
 import org.newdawn.slick.GameContainer;
@@ -767,7 +765,7 @@ public class GameClient extends BasicGame {
 						new TextLineCodecFactory(Charset.forName("US-ASCII"))));
 		connector.setHandler(new TcpProtocolHandler(this));
 		ConnectFuture cf = connector.connect(new InetSocketAddress(HOST, 7002));
-		cf.addListener(new IoFutureListener() {
+		cf.addListener(new IoFutureListener<IoFuture>() {
 			public void operationComplete(IoFuture s) {
 				try {
 					if(s.getSession() != null && s.getSession().isConnected()) {
@@ -804,7 +802,7 @@ public class GameClient extends BasicGame {
 						new TextLineCodecFactory(Charset.forName("US-ASCII"))));
 		udp.setHandler(new UdpProtocolHandler(this));
 		cf = udp.connect(new InetSocketAddress(HOST, 7005));
-		cf.addListener(new IoFutureListener() {
+		cf.addListener(new IoFutureListener<IoFuture>() {
 			public void operationComplete(IoFuture s) {
 				try {
 					if(s.getSession().isConnected()) {
@@ -841,7 +839,7 @@ public class GameClient extends BasicGame {
 						new TextLineCodecFactory(Charset.forName("US-ASCII"))));
 		chat.setHandler(new ChatProtocolHandler());
 		ConnectFuture cf2 = connector.connect(new InetSocketAddress(CHATHOST, 7001));
-		cf2.addListener(new IoFutureListener() {
+		cf2.addListener(new IoFutureListener<IoFuture>() {
 			public void operationComplete(IoFuture s) {
 				try {
 					if(s.getSession() != null && s.getSession().isConnected()) {

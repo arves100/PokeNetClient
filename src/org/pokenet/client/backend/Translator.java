@@ -26,37 +26,24 @@ public class Translator {
 		try {
 			String path = respath+"res/language/" + GameClient.getLanguage() + "/UI/" + filename + ".txt";
 			InputStream in = new FileInputStream(path);
-			if(in != null) {
-				BufferedReader f = new BufferedReader(new InputStreamReader(in));
-				Scanner reader = new Scanner(f);
-				while(reader.hasNextLine()) {
-					translated.add(reader.nextLine().replaceAll("/n", "\n"));
-				}
-				/*if(translated.size()==0){
-					FileInputStream fis = new FileInputStream(f);
-					BufferedInputStream bis = new BufferedInputStream(fis);
-					DataInputStream dis = new DataInputStream(bis);
-					 while (dis.available() != 0) {
-						 // this statement reads the line from the file
-						 translated.add(dis.readLine());
-					 }
-					 fis.close();
-					 bis.close();
-					 dis.close();
-				}*/
-			}else{ //In case of emergencies, load english!
-				try{
-					in = new FileInputStream(respath+"res/language/english/UI/" + filename + ".txt");
-					BufferedReader f = new BufferedReader(new InputStreamReader(in));
-					Scanner reader = new Scanner(f);
-					while(reader.hasNextLine()) {
-						translated.add(reader.nextLine().replaceAll("/n", "\n"));
-					}
-				}catch(Exception e){
-					translated.add("/n"); //If there's no english, display default line. 
-				}
-
+			BufferedReader f = new BufferedReader(new InputStreamReader(in));
+			Scanner reader = new Scanner(f);
+			while(reader.hasNextLine()) {
+				translated.add(reader.nextLine().replaceAll("/n", "\n"));
 			}
+			reader.close();
+			/*if(translated.size()==0){
+				FileInputStream fis = new FileInputStream(f);
+				BufferedInputStream bis = new BufferedInputStream(fis);
+				DataInputStream dis = new DataInputStream(bis);
+				 while (dis.available() != 0) {
+					 // this statement reads the line from the file
+					 translated.add(dis.readLine());
+				 }
+				 fis.close();
+				 bis.close();
+				 dis.close();
+			}*/
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
