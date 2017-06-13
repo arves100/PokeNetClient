@@ -67,6 +67,8 @@ import org.pokenet.client.ui.frames.PlayerPopupDialog;
  */
 @SuppressWarnings("unchecked")
 public class GameClient extends BasicGame {
+	// Version
+	private static final String m_clientVer = "0.1";
 	//Some variables needed
 	private static GameClient m_instance;
 	private static AppGameContainer gc;
@@ -1170,6 +1172,14 @@ public class GameClient extends BasicGame {
 	 */
 	public static void setDisableMaps(boolean b) {
 		m_disableMaps = b;
+	}
+	
+	/**
+	 * Return the client version
+	 * @return
+	 */
+	public static String getClientVer() {
+		return m_clientVer;
 	}
 
 	/**

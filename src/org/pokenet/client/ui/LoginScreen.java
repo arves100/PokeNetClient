@@ -200,19 +200,24 @@ public class LoginScreen extends Window {
 				s.close();
 			} else {
 				f = new File(path + "/.git/refs/heads/master");
-				Scanner s = new Scanner(f);
+				if (f.exists()) {
+					Scanner s = new Scanner(f);
 				
-				m_clientRev = new Label("Client Version: git: " + s.nextLine());
-				s.close();
-			}
-/*			} else {
-				f = new File(path + "rev.txt");
-				Scanner s;
-				s = new Scanner(f);
+					m_clientRev = new Label("Client Version: git: " + s.nextLine());
+					s.close();
+				} else {
+					f = new File(path + "rev.txt");
+					if (f.exists()) {
+						Scanner s;
+						s = new Scanner(f);
 
-				m_clientRev = new Label("Client Version: r" + s.nextLine());
-				s.close();
-			}*/
+						m_clientRev = new Label("Client Version: svn: " + s.nextLine());
+						s.close();		
+					} else {
+						m_clientRev = new Label("Client Version: " + GameClient.getClientVer());
+					}
+				}
+			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			m_clientRev = new Label("Client Version: ?");
